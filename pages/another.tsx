@@ -1,12 +1,10 @@
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-export type PropTypes = {
-  serverProps: Array<string>;
-};
+import { type PropTypes } from ".";
 
-const Home: NextPage<PropTypes> = (props) => {
+const Another: NextPage<PropTypes> = (props) => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -16,10 +14,10 @@ const Home: NextPage<PropTypes> = (props) => {
         </p>
 
         <Link
-          className="text-blue-400 hover:underline visited:text-violet-500 block mx-auto"
-          href="/another"
+          className="text-blue-400 hover:underline visited:text-violet-500"
+          href="/"
         >
-          Go Another
+          Go Home
         </Link>
 
         <div>
@@ -130,8 +128,9 @@ const Home: NextPage<PropTypes> = (props) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
-  return { props: { serverProps: ["foo", "bar"] } };
+export const getServerSideProps: GetServerSideProps = async () => {
+  // const serverProps = database.get('some-server-side-data')
+  return { props: { serverProps: ["bar", "foo"] } };
 };
 
-export default Home;
+export default Another;
